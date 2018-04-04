@@ -10,7 +10,9 @@ public class Main{
 		Color [][] lightGrayScale = imgu.cloneArray(img);
 		Color [][] aveGrayScale = imgu.cloneArray(img);
 		Color [][] luminGrayScale = imgu.cloneArray(img);
-		
+		Color [][] invertedColor = imgu.cloneArray(img);
+	//	invertColor(invertedColor);
+
 		imgu.addImage(grayScale(lightGrayScale,"light"),"Ligtness GrayScale");
 		imgu.addImage(grayScale(aveGrayScale,"ave"),"Average GrayScale");
 		imgu.addImage(grayScale(luminGrayScale,"lumin"),"Luminosity GrayScale");
@@ -49,5 +51,20 @@ public class Main{
 		}	
 		return img;
 	}
+
+/*	public static Color[][] invertColor(Color[][] img){
+		double h = 0;
+		double s = 0;
+		double v = 0;
+		float[] hsvvals = new float[3];
+
+		for(int row = 0; row < img.length; row++){
+			for(int col = 0; col < img.length; col++){
+				Color.RGBtoHSV(img[row][col].getRed(), img[row][col].getGreen(), img[row][col].getBlue(), hsvvals);
+				System.out.println(hsvvals.toString());
+				return img;
+			}
+		}
+	}*/
 
 }

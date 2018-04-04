@@ -11,7 +11,9 @@ public class Main{
 		imgu.addImage(grayScale(img,"light"),"Ligtness GrayScale");
 		imgu.addImage(grayScale(img,"ave"),"Average GrayScale");
 		imgu.addImage(grayScale(img,"lumin"),"Luminosity GrayScale");
-		imgu.addImage(messUp(img,100),"Messy Color");
+		imgu.addImage(messUp(img,10),"10 pixel deviation");
+		imgu.addImage(messUp(img,100),"100 pixel deviation");
+		imgu.addImage(messUp(img,1000),"1000 pixel deviation");
 		imgu.addImage(invertColor(img),"Inverted Color");
 
 		imgu.display();

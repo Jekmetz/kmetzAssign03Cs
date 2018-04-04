@@ -6,20 +6,17 @@ public class Main{
 		ImageUtils imgu = new ImageUtils();
 		Color[][] img = imgu.loadImage("LennaCV.png");
 		imgu.addImage(img,"TestTab");
-		
-		Color [][] lightGrayScale = imgu.cloneArray(img);
-		Color [][] aveGrayScale = imgu.cloneArray(img);
-		Color [][] luminGrayScale = imgu.cloneArray(img);
-		Color [][] invertedColor = imgu.cloneArray(img);
-	//	invertColor(invertedColor);
 
-		imgu.addImage(grayScale(lightGrayScale,"light"),"Ligtness GrayScale");
-		imgu.addImage(grayScale(aveGrayScale,"ave"),"Average GrayScale");
-		imgu.addImage(grayScale(luminGrayScale,"lumin"),"Luminosity GrayScale");
+		imgu.addImage(grayScale(img,"light"),"Ligtness GrayScale");
+		imgu.addImage(grayScale(img,"ave"),"Average GrayScale");
+		imgu.addImage(grayScale(img,"lumin"),"Luminosity GrayScale");
+		imgu.addImage(messUp(img),"Inverted Color");
 		imgu.display();
 	}
 	
-	public static Color[][] grayScale(Color[][] img, String type){
+	public static Color[][] grayScale(Color[][] orig, String type){
+
+		Color [][] img = ImageUtils.cloneArray(orig);
 		int r = 0;
 		int g = 0;
 		int b = 0;
@@ -52,7 +49,12 @@ public class Main{
 		return img;
 	}
 
-/*	public static Color[][] invertColor(Color[][] img){
+	public static Color[][] messUp(Color[][] orig){
+		Color [][] img = ImageUtils.cloneArray(orig);
+		int r = 0;
+		int g = 0;
+		int b = 0;
+		int rgb = 0;
 		double h = 0;
 		double s = 0;
 		double v = 0;
@@ -60,11 +62,20 @@ public class Main{
 
 		for(int row = 0; row < img.length; row++){
 			for(int col = 0; col < img.length; col++){
-				Color.RGBtoHSV(img[row][col].getRed(), img[row][col].getGreen(), img[row][col].getBlue(), hsvvals);
-				System.out.println(hsvvals.toString());
-				return img;
+				r = img[row][col].getRed();
+				g = img[row][col].getGreen();
+				b = img[row][col].getBlue();
+				
+				Color.RGBtoHSB(r,g,b,hsvvals);
+				rgb = Color.HSBtoRGB((float).5*hsvvals[0],hsvvals[1],hsvvals[2]);
+				r = (rgb>>16)&0xFF;
+				g = (rgb>>8)&0xFF;
+				b = rgb&0xFF;
+
+				img[row][col] = new Color(r,g,b);		
 			}
 		}
-	}*/
+		return img;
+	}
 
 }

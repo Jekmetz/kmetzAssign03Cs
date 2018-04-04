@@ -186,7 +186,7 @@ public class ImageUtils {
     // Get width and height to make new 2d array
     int width = img.getWidth();
     int height = img.getHeight();
-    Color[][] result = new Color[height][width];
+    Color[][] result = new Color[width][height];
 
     // Iterate through the array, adding new Colors from the intRGB values.
     for (int row = 0; row < width; row++) {

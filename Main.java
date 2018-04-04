@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.lang.Math;
+import java.util.Random;
 
 public class Main{
 	public static void main(String [] args){
@@ -10,7 +11,7 @@ public class Main{
 		imgu.addImage(grayScale(img,"light"),"Ligtness GrayScale");
 		imgu.addImage(grayScale(img,"ave"),"Average GrayScale");
 		imgu.addImage(grayScale(img,"lumin"),"Luminosity GrayScale");
-		imgu.addImage(messUp(img),"Messy Color");
+		imgu.addImage(messUp(img,100),"Messy Color");
 		imgu.addImage(invertColor(img),"Inverted Color");
 
 		imgu.display();
@@ -51,27 +52,20 @@ public class Main{
 		return img;
 	}
 
-	public static Color[][] messUp(Color[][] orig){
+	public static Color[][] messUp(Color[][] orig, int range){
 		Color [][] img = ImageUtils.cloneArray(orig);
 		int r = 0;
 		int g = 0;
 		int b = 0;
-		int rgb = 0;
-		float[] hsvvals = new float[3];
+		Random rng = new Random();
 
 		for(int row = 0; row < img.length; row++){
 			for(int col = 0; col < img.length; col++){
-				r = img[row][col].getRed();
-				g = img[row][col].getGreen();
-				b = img[row][col].getBlue();
+				r = abs(img[row][col].getRed() + rng.nextInt(2*range)-range)%255;
+				g = abs(img[row][col].getGreen() + rng.nextInt(2*range)-range)%255;
+				b = abs(img[row][col].getBlue() + rng.nextInt(2*range)-range)%255;
 				
-				Color.RGBtoHSB(r,g,b,hsvvals);
-				rgb = Color.HSBtoRGB((float).5*hsvvals[0],hsvvals[1],hsvvals[2]);
-				r = (rgb>>16)&0xFF;
-				g = (rgb>>8)&0xFF;
-				b = rgb&0xFF;
-
-				img[row][col] = new Color(r,g,b);		
+				img[row][col] = new Color(r,g,b);
 			}
 		}
 		return img;
@@ -110,5 +104,12 @@ public class Main{
 			sum = sum - loop;
 		}
 		return sum;
+	}
+
+	public static int abs(int num){
+		if(num < 0){
+			num = -num;
+		}
+		return num;
 	}
 }

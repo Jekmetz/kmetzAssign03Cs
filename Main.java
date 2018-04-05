@@ -79,20 +79,13 @@ public class Main{
 		int r = 0;
 		int g = 0;
 		int b = 0;
-		int rgb = 0;
-		float[] hsvvals = new float[3];
 		
 		for(int row = 0; row < img.length; row++){
 			for(int col = 0; col < img.length; col++){
-				r = img[row][col].getRed();
-				g = img[row][col].getGreen();
-				b = img[row][col].getBlue();
-				Color.RGBtoHSB(r,g,b,hsvvals);
-				rgb = Color.HSBtoRGB(loopFloat((float).5,hsvvals[0],(float)1),hsvvals[1],hsvvals[2]);
-				r = (rgb>>16)&0xFF;
-				g = (rgb>>8)&0xFF;
-				b = rgb&0xFF;
-
+				r = 255 - img[row][col].getRed();
+				g = 255 - img[row][col].getGreen();
+				b = 255 - img[row][col].getBlue();
+			
 				img[row][col] = new Color(r,g,b);
 
 			}

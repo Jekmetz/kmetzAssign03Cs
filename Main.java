@@ -1,6 +1,11 @@
 import java.awt.Color;
-import java.lang.Math;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
 
 public class Main{
 	public static void main(String [] args){
@@ -11,11 +16,29 @@ public class Main{
 		imgu.addImage(grayScale(img,"light"),"Ligtness GrayScale");
 		imgu.addImage(grayScale(img,"ave"),"Average GrayScale");
 		imgu.addImage(grayScale(img,"lumin"),"Luminosity GrayScale");
-		imgu.addImage(messUp(img,10),"10 pixel deviation");
-		imgu.addImage(messUp(img,100),"100 pixel deviation");
-		imgu.addImage(messUp(img,1000),"1000 pixel deviation");
+		imgu.addImage(messUp(img,10),"10 color deviation");
+		imgu.addImage(messUp(img,100),"100 color deviation");
+		imgu.addImage(messUp(img,100),"100 color devaiation #2");
+		imgu.addImage(messUp(img,1000),"1000 color deviation");
 		imgu.addImage(invertColor(img),"Inverted Color");
 
+		BufferedImage bi = ImageUtils.convertToBufferedFrom2D(messUp(img,100));
+		
+		try{
+			File filepath = new File(".\\fileFolder\\output.png").getCanonicalFile();
+			
+			if(!new File(".\\fileFolder").getCanonicalFile().exists()) {
+				new File(".\\fileFolder").getCanonicalFile().mkdir();
+			}
+			
+			System.out.println(filepath.toString());
+			ImageIO.write(bi, "png", filepath);
+		}catch(IIOException e) {
+			System.out.println("Damn it all");
+		}catch(IOException e) {
+			System.out.println("Damn it all again");
+		}
+		
 		imgu.display();
 	}
 	
@@ -62,7 +85,7 @@ public class Main{
 		Random rng = new Random();
 
 		for(int row = 0; row < img.length; row++){
-			for(int col = 0; col < img.length; col++){
+			for(int col = 0; col < img[row].length; col++){
 				r = abs(img[row][col].getRed() + rng.nextInt(2*range)-range)%255;
 				g = abs(img[row][col].getGreen() + rng.nextInt(2*range)-range)%255;
 				b = abs(img[row][col].getBlue() + rng.nextInt(2*range)-range)%255;
@@ -81,7 +104,7 @@ public class Main{
 		int b = 0;
 		
 		for(int row = 0; row < img.length; row++){
-			for(int col = 0; col < img.length; col++){
+			for(int col = 0; col < img[row].length; col++){
 				r = 255 - img[row][col].getRed();
 				g = 255 - img[row][col].getGreen();
 				b = 255 - img[row][col].getBlue();

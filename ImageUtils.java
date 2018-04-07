@@ -160,7 +160,7 @@ public class ImageUtils {
    * @param img the 2d array of Colors
    * @return the BufferedImage capable of being displayed
    */
-  private static BufferedImage convertToBufferedFrom2D(Color[][] img) {
+  public static BufferedImage convertToBufferedFrom2D(Color[][] img) {
     // Create new BufferedImage of specified width and height
     int width = img.length;
     int height = img[0].length;

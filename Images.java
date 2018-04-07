@@ -20,7 +20,9 @@ public class Images {
 		img = new BufferedImage[filenames.length];
 		
 		for (int i = 0; i < filenames.length; i++) {
-			img[i] = loadImage(filenames[i].toString());			
+
+			img[i] = loadImage(filenames[i].toString());
+			
 		}
 	}
 
@@ -45,6 +47,14 @@ public class Images {
 		}
 
 		return img;
+	}
+	
+	public BufferedImage getImage(int index) {
+		return img[index];		
+	}
+	
+	public int getLength() {
+		return img.length;
 	}
 
 }

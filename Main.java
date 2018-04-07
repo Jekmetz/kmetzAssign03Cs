@@ -17,13 +17,9 @@ public class Main {
 		imgu.addImage(grayScale(img, "light"), "Ligtness GrayScale");
 		imgu.addImage(grayScale(img, "ave"), "Average GrayScale");
 		imgu.addImage(grayScale(img, "lumin"), "Luminosity GrayScale");
-		imgu.addImage(messUp(img, 10), "10 color deviation");
-		imgu.addImage(messUp(img, 100), "100 color deviation");
-		imgu.addImage(messUp(img, 100), "100 color devaiation #2");
-		imgu.addImage(messUp(img, 1000), "1000 color deviation");
 		imgu.addImage(invertColor(img), "Inverted Color");
 		
-		pictureMess(img,folderName,5);
+		pictureMess(img,folderName,15,75);
 
 		imgu.display();
 		
@@ -34,6 +30,10 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println("Listen, we just could not find that folder.");
 		}
+		
+		VideoFrame vidFrame = new VideoFrame();
+		vidFrame.display();
+		vidFrame.repeatedImages(imgArray,30);
 
 	}
 
@@ -125,13 +125,13 @@ public class Main {
 		return num;
 	}
 
-	public static void pictureMess(Color[][] orig, String folderName, int numPics) {
+	public static void pictureMess(Color[][] orig, String folderName, int numPics, int mess) {
 
 		for (int i = 0; i < numPics; i++) {
 
-			Color[][] img = messUp(ImageUtils.cloneArray(orig),100);
+			Color[][] img = messUp(ImageUtils.cloneArray(orig),mess);
 
-			BufferedImage bi = ImageUtils.convertToBufferedFrom2D(messUp(img, 100));
+			BufferedImage bi = ImageUtils.convertToBufferedFrom2D(img);
 
 			try {
 				File filepath = new File(".\\" + folderName + "\\output" + Integer.toString(i) + ".png").getCanonicalFile();

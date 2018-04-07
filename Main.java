@@ -11,6 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		ImageUtils imgu = new ImageUtils();
 		Color[][] img = imgu.loadImage("LennaCV.png");
+		String folderName = "pictureFolder";
 		imgu.addImage(img, "TestTab");
 
 		imgu.addImage(grayScale(img, "light"), "Ligtness GrayScale");
@@ -22,9 +23,17 @@ public class Main {
 		imgu.addImage(messUp(img, 1000), "1000 color deviation");
 		imgu.addImage(invertColor(img), "Inverted Color");
 		
-		pictureMess(img,"pictureFolder",30);
+		pictureMess(img,folderName,5);
 
 		imgu.display();
+		
+		Images imgArray = new Images();
+		
+		try {
+			imgArray.addImagesFromFolder(new File(".\\" + folderName).getCanonicalPath());
+		} catch (IOException e) {
+			System.out.println("Listen, we just could not find that folder.");
+		}
 
 	}
 

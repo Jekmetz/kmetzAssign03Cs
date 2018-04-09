@@ -8,13 +8,16 @@ public class Images {
 	private BufferedImage[] img = null;
 
 	public void addImagesFromFolder(String filepath) {
+		/*
+		 *Method that looks through a folder and adds each of the buffered images into it.
+		 */
 		File folder = null;
 		File[] filenames = null;
 		try {
 			folder = new File(filepath).getCanonicalFile();
 			filenames = folder.listFiles();
 		} catch (IOException e) {
-			System.out.println("Something went wrong");
+			System.out.println("Something went wrong");	//Damn.
 		}
 		
 		img = new BufferedImage[filenames.length];
@@ -26,7 +29,7 @@ public class Images {
 		}
 	}
 
-	private BufferedImage loadImage(String filepath) {
+	private BufferedImage loadImage(String filepath){
 		// Load in the image.
 		BufferedImage buffImg = loadBufferedImage(filepath);
 		return buffImg;

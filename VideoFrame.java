@@ -6,11 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class VideoFrame {
+	//Declare all of the stuff that the class needs
 	private JFrame frame;
 	private JLabel label;
 	private Timer timer = new Timer();
 
 	public VideoFrame() {
+		/*
+		 *Constructor that sets the frame name that initializes the JFrame
+		 */
 		frame = new JFrame("Video Frame");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		label = new JLabel();
@@ -18,17 +22,24 @@ public class VideoFrame {
 	}
 
 	public void display() {
+		/*
+		 *Display the JFrame
+		 */
 		frame.pack();
 		frame.setMinimumSize(frame.getPreferredSize());
 		frame.setVisible(true);
 	}
 
 	public void repeatedImages(Images imgs,long framerate) {
-		TimerTask task = new TimerTask() {
-			int index = 0;
-			public void run() {
+		/*
+		 *See what this stuff does below
+		 */
+		TimerTask task = new TimerTask() {	//This is the object that the Timer depends on.
+			int index = 0;	//Specifier for the frame to display
+			public void run() {	//The method that defines what the timer will do
 				index++;
-				ImageIcon icon = new ImageIcon(imgs.getImage(index%imgs.getLength()));
+				ImageIcon icon = new ImageIcon(imgs.getImage(index%imgs.getLength()));	//Make the icon the next frame from 0-however many frames there are
+				//set the frame to what it is
 				label = new JLabel(icon);
 				frame.setContentPane(label);
 				frame.pack();

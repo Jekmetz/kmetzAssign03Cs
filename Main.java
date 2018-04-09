@@ -19,7 +19,7 @@ public class Main {
 		imgu.addImage(grayScale(img, "lumin"), "Luminosity GrayScale");
 		imgu.addImage(invertColor(img), "Inverted Color");
 		
-		pictureMess(img,folderName,15,75);
+		//pictureMess(img,folderName,15,75);	//Uncomment out the line before this if you want to make a filefolder with name String folderName, img Color[][] img, with 15 pngs all messed up with a color deviation of 75 :)
 
 		imgu.display();
 		
